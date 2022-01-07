@@ -7,5 +7,6 @@ defmodule Web.Endpoint do
     pass: ["application/json"],
     json_decoder: Jason
 
+  plug Plug.Logger
   plug Web.Router
 end

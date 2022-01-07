@@ -17,7 +17,7 @@ defmodule W.Application do
     [
       {:_,
        [
-         {"/ws", Web.UserSocket, []},
+         {"/ws", Web.Socket, [Web.UserSocket]},
          {:_, Plug.Cowboy.Handler, {Web.Endpoint, []}}
        ]}
     ]
