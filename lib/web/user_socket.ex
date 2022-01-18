@@ -2,6 +2,7 @@ defmodule Web.UserSocket do
   @moduledoc false
   @behaviour Web.Socket
   import Web.SocketError
+  require Logger
 
   @impl true
   def connect(%{headers: %{"authorization" => "Bearer " <> token}, peer: peer}) do
@@ -50,6 +51,11 @@ defmodule Web.UserSocket do
     end
   end
 
+  def handle_event("timeout", _params, assigns) do
+    :timer.sleep(500)
+    {:ok, assigns}
+  end
+
   def handle_event("crash", _params, _assigns) do
     raise "oops, crash ..."
   end
@@ -60,6 +66,7 @@ defmodule Web.UserSocket do
   end
 
   @impl true
-  def terminate(_reason, _assigns) do
+  def terminate(reason, _assigns) do
+    Logger.warn(["terminated: ", inspect(reason)])
   end
 end

@@ -41,6 +41,7 @@ defmodule Web.Socket do
 
   @impl true
   def websocket_handle({:ping, ping}, state) do
+    Logger.debug(["received ping ", IO.inspect(ping)])
     {[pong: ping], state}
   end
 
